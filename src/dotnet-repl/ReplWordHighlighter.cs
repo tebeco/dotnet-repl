@@ -25,61 +25,67 @@ namespace dotnet_repl
                 wordHighlighter.AddWords(csharpOnlyWordsToHighlight);
             else if (languageName is "fsharp")
                 wordHighlighter.AddWords(fsharpOnlyWordsToHighlight);
-            else
-                throw new System.NotSupportedException($"Kernel {languageName} has no keyword support.");
+            
+            // Since it also supports powershell, more keywords might be added by adding a case for "pwsh"
 
             return wordHighlighter;
         }
 
-        
-
         private static readonly WordsToHighlight sharedWordsToHighlight = new[]
             {
-                "async",
-                "await",
-                "bool",
-                "break",
-                "case",
-                "catch",
-                "class",
-                "else",
-                "finally",
-                "for",
-                "foreach",
-                "fun",
-                "if",
-                "in",
-                "int",
-                "interface",
-                "internal",
-                "let",
-                "match",
-                "member",
-                "mutable",
-                "new",
-                "not",
-                "null",
-                "open",
-                "override",
-                "private",
-                "protected",
-                "public",
-                "record",
-                "typeof",
-                "return",
-                "string",
-                "struct",
-                "switch",
-                "then",
-                "try",
-                "type",
-                "use",
-                "using",
-                "var",
-                "void",
-                "when",
-                "while",
-                "with",
+                
+                (new Style(foreground: Color.LightSlateBlue),
+                 new []
+                 {
+                    "and",
+                    "bool",
+                    "do",
+                    "else",
+                    "for",
+                    "foreach",
+                    "if",
+                    "int",
+                    "not",
+                    "null",
+                    "or",
+                    "private",
+                    "protected",
+                    "public",
+                    "typeof",
+                    "string",
+                    "when",
+                    "with"
+                 }),
+
+                 // C# operators (or shared)
+                 (new Style(foreground: Color.SteelBlue1_1), 
+                  new [] 
+                  {
+                     "_",
+                     "-", 
+                     ";", 
+                     ":", 
+                     "!", 
+                     "?", 
+                     ".", 
+                     "'", 
+                     "(", 
+                     ")",
+                     "{", 
+                     "}", 
+                     "@", 
+                     "*", 
+                     "\"", 
+                     "#", 
+                     "%", 
+                     "+", 
+                     "<", 
+                     "=",
+                     "=>", 
+                     ">", 
+                     "|", 
+                     "$",
+                  }),
             };
 
         private static readonly WordsToHighlight csharpOnlyWordsToHighlight = new[]
@@ -88,11 +94,28 @@ namespace dotnet_repl
                 (new Style(foreground: Color.LightSlateBlue),
                  new []
                  {
-                    "async", "await", "break", "case", "catch",
-                    "class", "else", "for", "foreach", "if",
-                    "in", "interface", "internal", 
-                    "override", "or", "return", "record",
-                    "switch", "try",  "using", "var", "void",
+                    "async", 
+                    "await", 
+                    "break", 
+                    "case", 
+                    "catch",
+                    "class", 
+                    "else", 
+                    "for", 
+                    "foreach", 
+                    "if",
+                    "in", 
+                    "interface", 
+                    "internal", 
+                    "override", 
+                    "or", 
+                    "return", 
+                    "record",
+                    "switch", 
+                    "try",  
+                    "using", 
+                    "var", 
+                    "void",
                     "while"
                  }),
 
@@ -110,15 +133,32 @@ namespace dotnet_repl
                  (new Style(foreground: Color.LightSlateBlue),
                   new []
                   {
-                     "elif", "fun", "function", "inline", "lazy", "let",
-                     "match", "member", "mutable", "of", "open", "rec", 
-                     "then", "to", "type", "val", "with", "yield"
+                     "elif", 
+                     "fun", 
+                     "function", 
+                     "inline", 
+                     "lazy", 
+                     "let",
+                     "match", 
+                     "member", 
+                     "mutable", 
+                     "of", 
+                     "open", 
+                     "rec", 
+                     "then", 
+                     "to", 
+                     "type", 
+                     "val", 
+                     "with", 
+                     "yield"
                   }),
 
                  // F# operators
                  (new Style(foreground: Color.SteelBlue1_1),
                   new []{
-                     "|>", "->"
+                     "|>", 
+                     "->", 
+                     "<-"
                   })
             };
     }
